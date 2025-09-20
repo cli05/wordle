@@ -43,7 +43,7 @@ function initializeGame() {
     // HINT: Use hideModal() and ensure message element is hidden
     hideModal();
     
-    console.log('Game initialized!'); // Remove this line when implementing
+    //console.log('Game initialized!'); // Remove this line when implementing
 }
 
 /**
@@ -58,21 +58,44 @@ function initializeGame() {
  */
 function handleKeyPress(key) {
     // TODO: Check if game is over - if so, return early
+    if (gameOver) {
+        return;
+    }
     
     // TODO: Handle letter keys (A-Z)
     // HINT: Use regex /^[A-Z]$/ to test if key is a letter
     // HINT: Check if currentGuess.length < WORD_LENGTH before adding
     // HINT: Use getTile() and updateTileDisplay() to show the letter
+    if ((/^[A-Z]$/.test(key))) {
+        if (currentGuess.length < WORD_LENGTH) {
+            tile = getTile(currentRow, currentGuess.length() - 1);
+            updateTileDisplay(tile, key);
+        }
+    }
     
     // TODO: Handle ENTER key
     // HINT: Check if guess is complete using isGuessComplete()
     // HINT: Call submitGuess() if complete, show error message if not
+    if (key === "ENTER") {
+        if (isGuessComplete()) {
+            submitGuess();
+        } else {
+            showMessage("Guess not complete!", type = 'error');
+        }
+    }
     
     // TODO: Handle BACKSPACE key  
     // HINT: Check if there are letters to remove
     // HINT: Clear the tile display and remove from currentGuess
+    if (key === "BACKSPACE") {
+        if ((currentGuess.length > 0) && (currentGuess.length <= WORD_LENGTH)) {
+            tile = getTile(currentRow, currentGuess.length() - 1);
+            updateTileDisplay(tile, null);
+            currentGuess = currentGuess.substring(0, currentGuess.length() - 1);
+        }
+    }
     
-    console.log('Key pressed:', key); // Remove this line when implementing
+    //console.log('Key pressed:', key); // Remove this line when implementing
 }
 
 /**
