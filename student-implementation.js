@@ -168,12 +168,15 @@ function checkLetter(guessLetter, position, targetWord) {
     
     // TODO: Check if letter exists elsewhere in target
     // HINT: Use targetWord.includes() or indexOf()
+    if (targetWord.includes(guessLetter)) {
+        return 'present';
+    }
     
     // TODO: Handle duplicate letters correctly
     // This is the most challenging part - you may want to implement
     // a more sophisticated algorithm that processes the entire word
     
-    console.log('Checking letter:', guessLetter, 'at position:', position); // Remove this line
+    //console.log('Checking letter:', guessLetter, 'at position:', position); // Remove this line
     return 'absent'; // Replace with actual logic
 }
 
