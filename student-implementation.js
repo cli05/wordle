@@ -33,6 +33,7 @@ function initializeGame() {
     
     // TODO: Get a random word from the word list
     // HINT: Use WordleWords.getRandomWord()
+    currentWord = WordleWords.getRandomWord();
     
     // TODO: Reset the game board
     // HINT: Use resetBoard()
