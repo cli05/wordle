@@ -41,6 +41,7 @@ function initializeGame() {
     
     // TODO: Hide any messages
     // HINT: Use hideModal() and ensure message element is hidden
+    hideModal();
     
     console.log('Game initialized!'); // Remove this line when implementing
 }
