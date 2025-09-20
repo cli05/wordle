@@ -111,14 +111,22 @@ function handleKeyPress(key) {
 function submitGuess() {
     // TODO: Validate guess is complete
     // HINT: Use isGuessComplete()
+    if (!isGuessComplete()) {
+        return;
+    }
     
     // TODO: Validate guess is a real word
     // HINT: Use WordleWords.isValidWord()
     // HINT: Show error message and shake row if invalid
+    if (!WordleWords.isValidWord()) {
+        shaekRow(currentRow);
+        showMessage("Word now valid!", type = 'error');
+    }
     
     // TODO: Check each letter and get results
     // HINT: Use checkLetter() for each position
     // HINT: Store results in an array
+
     
     // TODO: Update tile colors immediately
     // HINT: Loop through results and use setTileState()
@@ -150,9 +158,13 @@ function submitGuess() {
  */
 function checkLetter(guessLetter, position, targetWord) {
     // TODO: Convert inputs to uppercase for comparison
+    guessLetter = guessLetter.toUpperCase();
     
     // TODO: Check if letter is in correct position
     // HINT: Compare targetWord[position] with guessLetter
+    if (targetWord[position] === guessLetter) {
+        return 'correct';
+    }
     
     // TODO: Check if letter exists elsewhere in target
     // HINT: Use targetWord.includes() or indexOf()
