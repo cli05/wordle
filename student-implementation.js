@@ -37,6 +37,7 @@ function initializeGame() {
     
     // TODO: Reset the game board
     // HINT: Use resetBoard()
+    resetBoard();
     
     // TODO: Hide any messages
     // HINT: Use hideModal() and ensure message element is hidden
