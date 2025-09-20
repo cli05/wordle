@@ -207,11 +207,21 @@ function checkLetter(guessLetter, position, targetWord) {
 function updateGameState(isCorrect) {
     // TODO: Handle win condition
     // HINT: Set gameWon and gameOver flags, call showEndGameModal
+    if (isCorrect) {
+        gameWon = true;
+        gameOver = true;
+        showEndGameModal(gameWon, currentWord);
+        return;
+    }
     
     // TODO: Handle lose condition  
     // HINT: Check if currentRow >= MAX_GUESSES - 1
+    if (currentRow >= MAX_GUESSES - 1) {
+        gameOver = true;
+        showEndGameModal(gameWon, currentWord);
+    }
     
-    console.log('Game state updated. Correct:', isCorrect); // Remove this line
+    //console.log('Game state updated. Correct:', isCorrect); // Remove this line
 }
 
 // ========================================
