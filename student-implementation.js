@@ -145,6 +145,8 @@ function submitGuess() {
     // HINT: Call updateKeyboardColors()
     updateKeyboardColors(currentGuess, results);
 
+    processRowReveal(currentRow, results);
+
     // TODO: Check if guess was correct
     // HINT: Compare currentGuess with currentWord
     let isCorrect = (currentGuess === currentWord) ? true : false;
@@ -268,11 +270,14 @@ function updateKeyboardColors(guess, results) {
 function processRowReveal(rowIndex, results) {
     // TODO: Check if all results are 'correct'
     // HINT: Use results.every() method
+    if (results.every(result => result === 'correct')) {
+        celebrateRow(rowIndex);
+    }
     
     // TODO: If all correct, trigger celebration
     // HINT: Use celebrateRow() function
     
-    console.log('Processing row reveal for row:', rowIndex); // Remove this line
+    //console.log('Processing row reveal for row:', rowIndex); // Remove this line
 }
 
 /**
