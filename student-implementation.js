@@ -122,6 +122,7 @@ function submitGuess() {
     if (!WordleWords.isValidWord(currentGuess)) {
         shakeRow(currentRow);
         showMessage("Word not valid!", type = 'error');
+        return;
     }
     
     // TODO: Check each letter and get results
@@ -129,7 +130,7 @@ function submitGuess() {
     // HINT: Store results in an array
     const results = [];
     for (let i = 0; i < currentGuess.length; i++) {
-        results[i] = checkLetter(currentGuess[i], i, currentWord) === 'correct';
+        results[i] = checkLetter(currentGuess[i], i, currentWord);
     }
 
     
@@ -246,6 +247,12 @@ function updateKeyboardColors(guess, results) {
     // TODO: Apply color with priority system
     // HINT: Don't change green keys to yellow or gray
     // HINT: Don't change yellow keys to gray
+
+    for (let i = 0; i < currentGuess.length; i++) {
+        const letter = currentGuess[i];
+        const element = document.querySelector('[data-key="${letter}"]');
+        console.log(element);
+    }
     
     console.log('Updating keyboard colors for:', guess); // Remove this line
 }
