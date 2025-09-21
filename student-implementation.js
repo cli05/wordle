@@ -248,13 +248,13 @@ function updateKeyboardColors(guess, results) {
     // HINT: Don't change green keys to yellow or gray
     // HINT: Don't change yellow keys to gray
 
-    for (let i = 0; i < currentGuess.length; i++) {
-        const letter = currentGuess[i];
-        const element = document.querySelector('[data-key="${letter}"]');
-        console.log(element);
+    for (let i = 0; i < guess.length; i++) {
+        const letter = guess[i];
+        const element = document.querySelector(`[data-key="${letter}"]`);
+        updateKeyboardKey(letter, results[i]);
     }
     
-    console.log('Updating keyboard colors for:', guess); // Remove this line
+    //console.log('Updating keyboard colors for:', guess); // Remove this line
 }
 
 /**
