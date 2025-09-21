@@ -90,7 +90,7 @@ function getTile(row, col) {
  * @returns {NodeList} All tile elements in the row
  */
 function getRowTiles(row) {
-    return document.querySelectorAll(`[data-row="${row}"]`);
+    return document.querySelectorAll(`.tile[data-row="${row}"]`);
 }
 
 /**

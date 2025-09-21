@@ -136,31 +136,31 @@ function submitGuess() {
     
     // TODO: Update tile colors immediately
     // HINT: Loop through results and use setTileState()
-    for (let i = 0; i < currentGuess.length; i++) {
-        tile = getTile(currentRow, i);
-        setTileState(tile, results[i]);
-    }
     
-    // TODO: Update keyboard colors
-    // HINT: Call updateKeyboardColors()
-    updateKeyboardColors(currentGuess, results);
+    flipRowTiles(currentRow, results, () => {
+        // This callback runs after the flip animation completes
+        
+        // TODO: Update keyboard colors
+        // HINT: Call updateKeyboardColors()
+        updateKeyboardColors(currentGuess, results);
 
-    processRowReveal(currentRow, results);
+        processRowReveal(currentRow, results);
 
-    // TODO: Check if guess was correct
-    // HINT: Compare currentGuess with currentWord
-    let isCorrect = (currentGuess === currentWord) ? true : false;
-    
-    // TODO: Update game state
-    // HINT: Call updateGameState()
-    updateGameState(isCorrect);
-    
-    // TODO: Move to next row if game continues
-    // HINT: Increment currentRow and reset currentGuess
-    if (!isCorrect) {
-        currentRow++;
-        currentGuess = '';
-    }
+        // TODO: Check if guess was correct
+        // HINT: Compare currentGuess with currentWord
+        let isCorrect = (currentGuess === currentWord) ? true : false;
+        
+        // TODO: Update game state
+        // HINT: Call updateGameState()
+        updateGameState(isCorrect);
+        
+        // TODO: Move to next row if game continues
+        // HINT: Increment currentRow and reset currentGuess
+        if (!isCorrect) {
+            currentRow++;
+            currentGuess = '';
+        }
+    });
     
     //console.log('Guess submitted:', currentGuess); // Remove this line when implementing
 }
@@ -296,11 +296,13 @@ function showEndGameModal(won, targetWord) {
     
     // TODO: Update statistics
     // HINT: Use updateStats() function
+    updateStats(won);
     
     // TODO: Show the modal
     // HINT: Use showModal() function
+    showModal(won, currentWord, currentRow + 1);
     
-    console.log('Showing end game modal. Won:', won, 'Word:', targetWord); // Remove this line
+    //console.log('Showing end game modal. Won:', won, 'Word:', targetWord); // Remove this line
 }
 
 /**
