@@ -42,7 +42,7 @@ function initializeGame() {
     // TODO: Hide any messages
     // HINT: Use hideModal() and ensure message element is hidden
     hideModal();
-    
+    console.log(currentWord);
     //console.log('Game initialized!'); // Remove this line when implementing
 }
 
@@ -68,8 +68,9 @@ function handleKeyPress(key) {
     // HINT: Use getTile() and updateTileDisplay() to show the letter
     if ((/^[A-Z]$/.test(key))) {
         if (currentGuess.length < WORD_LENGTH) {
-            tile = getTile(currentRow, currentGuess.length() - 1);
+            tile = getTile(currentRow, currentGuess.length);
             updateTileDisplay(tile, key);
+            currentGuess += key;
         }
     }
     
@@ -89,9 +90,9 @@ function handleKeyPress(key) {
     // HINT: Clear the tile display and remove from currentGuess
     if (key === "BACKSPACE") {
         if ((currentGuess.length > 0) && (currentGuess.length <= WORD_LENGTH)) {
-            tile = getTile(currentRow, currentGuess.length() - 1);
-            updateTileDisplay(tile, null);
-            currentGuess = currentGuess.substring(0, currentGuess.length() - 1);
+            tile = getTile(currentRow, currentGuess.length - 1);
+            tile.textContent = '';
+            currentGuess = currentGuess.substring(0, currentGuess.length - 1);
         }
     }
     
@@ -120,21 +121,21 @@ function submitGuess() {
     // HINT: Show error message and shake row if invalid
     if (!WordleWords.isValidWord(currentGuess)) {
         shakeRow(currentRow);
-        showMessage("Word now valid!", type = 'error');
+        showMessage("Word not valid!", type = 'error');
     }
     
     // TODO: Check each letter and get results
     // HINT: Use checkLetter() for each position
     // HINT: Store results in an array
     const results = [];
-    for (let i = 0; i < guessLetter.length; i++) {
+    for (let i = 0; i < currentGuess.length; i++) {
         results[i] = checkLetter(currentGuess[i], i, currentWord) === 'correct';
     }
 
     
     // TODO: Update tile colors immediately
     // HINT: Loop through results and use setTileState()
-    for (let i = 0; i < guessLetter.length; i++) {
+    for (let i = 0; i < currentGuess.length; i++) {
         tile = getTile(currentRow, i);
         setTileState(tile, results[i]);
     }
@@ -220,7 +221,6 @@ function updateGameState(isCorrect) {
         gameOver = true;
         showEndGameModal(gameWon, currentWord);
     }
-    
     //console.log('Game state updated. Correct:', isCorrect); // Remove this line
 }
 
