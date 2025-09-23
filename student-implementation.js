@@ -317,18 +317,37 @@ function showEndGameModal(won, targetWord) {
  */
 function validateInput(key, currentGuess) {
     // TODO: Return false if game is over
+    if (gameOver) {
+        return false;
+    }
     
     // TODO: Handle letter keys
     // HINT: Check if currentGuess.length < WORD_LENGTH
+    if ((/^[A-Z]$/.test(key))) {
+        if (currentGuess.length < WORD_LENGTH) {
+            return true;
+        }
+    }
     
     // TODO: Handle ENTER key
     // HINT: Check if currentGuess.length === WORD_LENGTH
+    if (key === 'ENTER') {
+        if (currentGuess.length === WORD_LENGTH) {
+            return true;
+        }
+    }
     
     // TODO: Handle BACKSPACE key
     // HINT: Check if currentGuess.length > 0
+    if (key === 'BACKSPACE') {
+        if (currentGuess.length > 0) {
+            return true;
+        }
+    }
+
     
     console.log('Validating input:', key); // Remove this line
-    return true; // Replace with actual validation logic
+    return false; 
 }
 
 // ========================================
