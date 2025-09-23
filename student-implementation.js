@@ -128,10 +128,13 @@ function submitGuess() {
     // TODO: Check each letter and get results
     // HINT: Use checkLetter() for each position
     // HINT: Store results in an array
-    const results = [];
-    for (let i = 0; i < currentGuess.length; i++) {
-        results[i] = checkLetter(currentGuess[i], i, currentWord);
-    }
+
+    // const results = [];
+    // for (let i = 0; i < currentGuess.length; i++) {
+    //     results[i] = checkLetter(currentGuess[i], i, currentWord);
+    // }
+
+    const results = checkWordResults(currentGuess, currentWord);
 
     
     // TODO: Update tile colors immediately
@@ -194,9 +197,32 @@ function checkLetter(guessLetter, position, targetWord) {
     // TODO: Handle duplicate letters correctly
     // This is the most challenging part - you may want to implement
     // a more sophisticated algorithm that processes the entire word
-    
     //console.log('Checking letter:', guessLetter, 'at position:', position); // Remove this line
     return 'absent'; // Replace with actual logic
+}
+
+//function to replace checking each letter individually
+// see submitGuess() to view implementation
+function checkWordResults(guess, targetWord) {
+    //we are guaranteed that this is a "complete" guess
+
+    const results = ['absent', 'absent', 'absent', 'absent', 'absent'];
+    let targetWordRemaining = targetWord;
+    for (let i = 0; i < 5; i++) {
+        if (guess[i] === targetWord[i]) {
+            targetWordRemaining = targetWordRemaining.replace(guess[i], '');
+            results[i] = 'correct';
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        if (targetWordRemaining.includes(guess[i]) && guess[i] !== targetWord[i]) {
+            targetWordRemaining = targetWordRemaining.replace(guess[i], '');
+            results[i] = 'present';
+        }
+    }
+
+    return results;
 }
 
 /**
@@ -345,8 +371,6 @@ function validateInput(key, currentGuess) {
         }
     }
 
-    
-    console.log('Validating input:', key); // Remove this line
     return false; 
 }
 
